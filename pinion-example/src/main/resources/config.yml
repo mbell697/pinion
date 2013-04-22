@@ -1,0 +1,6 @@
+defaultName: PinionExample
+
+pinion:
+  assetPath: assets/
+  appVersion: 0.0.1
+
