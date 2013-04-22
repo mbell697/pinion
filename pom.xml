@@ -3,17 +3,69 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <prerequisites>
+        <maven>3.0.0</maven>
+    </prerequisites>
 
     <groupId>org.pinion</groupId>
     <artifactId>pinion-parent</artifactId>
     <version>0.0.1</version>
+    <packaging>pom</packaging>
+    <name>Pinion Project</name>
+    <url>https://github.com/mbell697/pinion</url>
+    <description>
+        Asset management for servlets.
+    </description>
+
     <modules>
         <module>pinion-core</module>
         <module>pinion-example</module>
         <module>pinion-dropwizard</module>
     </modules>
 
-    <packaging>pom</packaging>
-    <name>pinion-parent</name>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
+    <developers>
+        <developer>
+            <name>Mark Bell</name>
+            <email>mbell697@gmail.com</email>
+            <timezone>-5</timezone>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/mbell697/pinion.git</connection>
+        <developerConnection>scm:git:git@github.com:mbell697/pinion.git</developerConnection>
+        <url>http://github.com/mbell697/pinion/</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <issueManagement>
+        <system>github</system>
+        <url>https://github.com/mbell697/pinion/issues</url>
+    </issueManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12.2</version>
+                <configuration>
+                    <useSystemClassLoader>false</useSystemClassLoader>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
