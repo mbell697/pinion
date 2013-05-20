@@ -1,6 +1,7 @@
 package org.pinion.core.cache;
 
 
+import com.google.common.io.ByteStreams;
 import com.google.common.io.CharStreams;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
@@ -16,7 +17,7 @@ public class MemoryCache extends Cache {
   }
 
   @Override
-  protected void put(final String key, final String value) {
+  protected void put(final String key, final byte[] value) {
     FileObject f = null;
     try {
       FileSystemManager fs = VFS.getManager();
@@ -25,7 +26,7 @@ public class MemoryCache extends Cache {
         f.delete();
       }
       f.createFile();
-      f.getContent().getOutputStream().write(value.getBytes());
+      f.getContent().getOutputStream().write(value);
     } catch (IOException e) {
       throw new Error(e);
     } finally {
@@ -40,7 +41,7 @@ public class MemoryCache extends Cache {
   }
 
   @Override
-  protected String get(final String key) {
+  protected byte[] get(final String key) {
     FileObject f = null;
     try {
       FileSystemManager fs = VFS.getManager();
@@ -48,7 +49,7 @@ public class MemoryCache extends Cache {
       if (!f.exists()) {
         return null;
       }
-      return CharStreams.toString(new InputStreamReader(f.getContent().getInputStream()));
+      return ByteStreams.toByteArray(f.getContent().getInputStream());
     } catch (IOException e) {
       throw new Error(e);
     } finally {

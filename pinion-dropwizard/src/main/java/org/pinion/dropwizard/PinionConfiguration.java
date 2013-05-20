@@ -43,7 +43,7 @@ public class PinionConfiguration {
   }
 
   public Configuration buildPinionConfig() {
-    return null; //TODO
+    return new Configuration(); //TODO
   }
 
   public String getAssetPath() {

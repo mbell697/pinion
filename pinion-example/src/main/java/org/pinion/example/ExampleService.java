@@ -9,7 +9,7 @@ import org.pinion.dropwizard.PinionConfiguration;
 
 public class ExampleService extends Service<ExampleConfiguration> {
 
-  private final PinionBundle<ExampleConfiguration> pinionBundle = new PinionBundle<ExampleConfiguration>("assets/") {
+  private final PinionBundle<ExampleConfiguration> pinionBundle = new PinionBundle<ExampleConfiguration>("/assets/") {
     @Override
     public PinionConfiguration getPinionConfiguration(ExampleConfiguration configuration) {
       return configuration.getPinionConfiguration();

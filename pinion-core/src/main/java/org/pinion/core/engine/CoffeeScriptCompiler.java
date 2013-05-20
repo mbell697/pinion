@@ -24,7 +24,7 @@ public class CoffeeScriptCompiler implements Engine {
 
   private void buildJSEngine() {
     try {
-      try (InputStream inputStream = getClass().getResourceAsStream("../../../../support/coffee-script.js")) {
+      try (InputStream inputStream = getClass().getResourceAsStream("/support/coffee-script.js")) {
         try (Reader reader = new InputStreamReader(inputStream, "UTF-8")) {
           final Context context = Context.enter();
           context.setOptimizationLevel(9);

@@ -75,6 +75,8 @@ public class Pinion {
     //MimeTypes
     registerMimeExtension(".css", MediaType.CSS_UTF_8);
     registerMimeExtension(".js", MediaType.JAVASCRIPT_UTF_8);
+    registerMimeExtension(".html", MediaType.HTML_UTF_8);
+    registerMimeExtension(".htm", MediaType.HTML_UTF_8);
 
     //Preprocessors
     registerPreprocessor(MediaType.CSS_UTF_8, new DirectiveProcessor());

@@ -39,20 +39,19 @@ public class PinionServlet extends HttpServlet {
       resp.setContentType(asset.contentType.toString());
 
       //check if they asset is fresh, if so try to grab it's content from the cache
-      String source = null;
+      byte[] source = null;
       if (Pinion.get().fresh(asset)) { //content fresh, check in cache
         source = Pinion.get().cache.get(asset);
       }
       if (source == null) { //not in cache
         try (InputStream data = asset.source(Pinion.get())) {
-          ByteStreams.copy(data, resp.getOutputStream());
-          Reader r = new InputStreamReader(data);
-          Pinion.get().cache.put(asset, CharStreams.toString(r));
-          r.close();
+          source = ByteStreams.toByteArray(data);
+          Pinion.get().cache.put(asset,source);
           //TODO flush cache of old versions of this file???
         }
-      } else //content found in cache
-        resp.getWriter().write(source);
+      }
+
+      resp.getOutputStream().write(source);
     } catch (IOException e) {
       resp.setStatus(404);
     }

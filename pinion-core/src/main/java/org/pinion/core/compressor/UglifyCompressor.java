@@ -38,7 +38,7 @@ public class UglifyCompressor implements Compressor {
         "var ast = ast.transform(compressor);" +
         "return ast.print_to_string();};";
 
-    try (InputStream is = getClass().getResourceAsStream("../../../../support/uglifyjs.js")) {
+    try (InputStream is = getClass().getResourceAsStream("/support/uglifyjs.js")) {
       final Context cx = Context.enter();
       cx.setOptimizationLevel(9);
       final Global global = new Global();

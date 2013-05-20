@@ -23,7 +23,7 @@ public class CssminCompressor implements Compressor {
 
   private void buildJSEngine() {
     try {
-      try (InputStream inputStream = getClass().getResourceAsStream("../../../../support/cssmin.js")) {
+      try (InputStream inputStream = getClass().getResourceAsStream("/support/cssmin.js")) {
         try (Reader reader = new InputStreamReader(inputStream, "UTF-8")) {
           final Context context = Context.enter();
           context.setOptimizationLevel(9);
