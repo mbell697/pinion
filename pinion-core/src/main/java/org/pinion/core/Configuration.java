@@ -1,6 +1,5 @@
 package org.pinion.core;
 
-import com.asual.lesscss.LessOptions;
 import com.google.javascript.jscomp.CompilerOptions;
 import org.pinion.core.compressor.CssminCompressor;
 import org.pinion.core.compressor.UglifyCompressor;
@@ -19,8 +18,6 @@ public class Configuration {
   private Boolean cssCompress = true;
 
   private CoffeeScriptCompiler.Options coffee = null;
-
-  private LessOptions less = null;
 
   private CompilerOptions closure = null;
 
@@ -50,14 +47,6 @@ public class Configuration {
 
   public void setCoffee(CoffeeScriptCompiler.Options coffee) {
     this.coffee = coffee;
-  }
-
-  public LessOptions getLess() {
-    return less;
-  }
-
-  public void setLess(LessOptions less) {
-    this.less = less;
   }
 
   public CompilerOptions getClosure() {

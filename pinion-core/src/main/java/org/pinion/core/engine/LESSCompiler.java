@@ -1,28 +1,24 @@
 package org.pinion.core.engine;
 
-import com.asual.lesscss.LessEngine;
-import com.asual.lesscss.LessException;
-import com.asual.lesscss.LessOptions;
+import org.lesscss.LessCompiler;
+import org.lesscss.LessException;
 import org.pinion.core.asset.Asset;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class LESSCompiler implements Engine {
 
-  LessOptions options;
-  LessEngine engine;
+  LessCompiler lessCompiler = new LessCompiler();
 
-  public LESSCompiler(final LessOptions options) {
-    if (options == null) {
-      this.options = new LessOptions();
-    } else {
-      this.options = options;
-    }
-    engine = new LessEngine(this.options);
+  public LESSCompiler() {
+
   }
 
   @Override
   public String run(String input, Asset asset) {
     try {
-      return engine.compile(input);
+      return lessCompiler.compile(input);
     } catch (LessException e) {
       throw new IllegalStateException("Less Compilation Failed: " + e.getMessage());
     }

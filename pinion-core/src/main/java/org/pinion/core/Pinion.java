@@ -102,7 +102,7 @@ public class Pinion {
 
     //Engines
     registerEngine(".coffee", new CoffeeScriptCompiler(config.getCoffee()));
-    registerEngine(".less", new LESSCompiler(config.getLess()));
+    registerEngine(".less", new LESSCompiler());
     registerEngine(".jade", new JadeCompiler());
 
     //paths
