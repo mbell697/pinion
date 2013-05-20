@@ -19,6 +19,7 @@ import org.pinion.core.compressor.CssminCompressor;
 import org.pinion.core.compressor.UglifyCompressor;
 import org.pinion.core.engine.CoffeeScriptCompiler;
 import org.pinion.core.engine.Engine;
+import org.pinion.core.engine.JadeCompiler;
 import org.pinion.core.engine.LESSCompiler;
 import org.pinion.core.files.FileResolver;
 import org.pinion.core.preprocessor.DirectiveProcessor;
@@ -100,6 +101,7 @@ public class Pinion {
     //Engines
     registerEngine(".coffee", new CoffeeScriptCompiler(config.getCoffee()));
     registerEngine(".less", new LESSCompiler(config.getLess()));
+    registerEngine(".jade", new JadeCompiler());
 
     //paths
     basePath = config.getAssetPath();

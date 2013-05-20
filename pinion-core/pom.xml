@@ -13,7 +13,12 @@
 
     <packaging>jar</packaging>
     <name>pinion-core</name>
-
+    <repositories>
+        <repository>
+            <id>jade4j-releases</id>
+            <url>https://raw.github.com/neuland/jade4j/master/releases</url>
+        </repository>
+    </repositories>
     <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -86,6 +91,11 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>de.neuland</groupId>
+            <artifactId>jade4j</artifactId>
+            <version>0.3.11</version>
         </dependency>
         <!-- Test dependencies -->
         <dependency>
