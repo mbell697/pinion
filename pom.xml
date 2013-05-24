@@ -9,7 +9,7 @@
 
     <groupId>org.pinion</groupId>
     <artifactId>pinion-parent</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Pinion Project</name>
     <url>https://github.com/mbell697/pinion</url>
