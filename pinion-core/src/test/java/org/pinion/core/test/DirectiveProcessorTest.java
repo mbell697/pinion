@@ -131,4 +131,18 @@ public class DirectiveProcessorTest {
 
   }
 
+  @Test
+  public void resolvesLogicalPath() {
+    try {
+      String input = testData("nested_path");
+      String output = dp.run(input, asset);
+      assertEquals(input, output);
+    } catch (FileSystemException e) {
+      fail();
+    }
+    assertThat(asset.getDependencyPaths(), hasItem("js/a"));
+    assertThat(asset.getDependencyPaths(), hasItem("app/js/b"));
+    assertThat(asset.getDependencyPaths(), hasItem("c"));
+  }
+
 }

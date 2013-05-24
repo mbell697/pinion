@@ -1,0 +1,9 @@
+// Header
+//
+// =require "js/a"
+// =require "app/js/b"
+//
+// =require "c"
+
+(function() {
+})();

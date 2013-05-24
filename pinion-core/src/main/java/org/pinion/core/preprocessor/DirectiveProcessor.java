@@ -38,7 +38,10 @@ public class DirectiveProcessor implements Preprocessor {
       for (String arg: d.args.get()) {
         List<FileObject> files = FileResolver.resolveGlob(asset.fsPath, arg.replace("\"", ""));
         for (FileObject file : files) {
-          requiredPaths.add(file.getName().getBaseName());
+          String absolutePath = file.getName().getPath();
+          String rootPath = asset.fsPath + "/";
+          String logicalPath = absolutePath.replaceFirst(rootPath,"");
+          requiredPaths.add(logicalPath);
         }
       }
     }
