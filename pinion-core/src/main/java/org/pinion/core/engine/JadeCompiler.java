@@ -7,6 +7,7 @@ import org.pinion.core.asset.Asset;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.util.HashMap;
 
 public class JadeCompiler implements Engine {
   JadeConfiguration config = new JadeConfiguration();
@@ -18,7 +19,7 @@ public class JadeCompiler implements Engine {
   @Override
   public String run(String input, Asset asset) {
     try {
-      return config.renderTemplate(config.getTemplate(input),null);
+      return config.renderTemplate(config.getTemplate(input),new HashMap<String,Object>());
     } catch (IOException e) {
       throw new Error("This is impossible");
     }
