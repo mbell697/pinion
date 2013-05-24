@@ -55,7 +55,7 @@ public class ProcessedAsset extends Asset {
     //TODO dependencies should be checked for freshness and their results cached
     StringBuilder b = new StringBuilder();
     for (Asset asset : requiredAssets) {
-      try (InputStream data = asset.source(env)) { b.append(data); }
+      try (InputStream data = asset.source(env)) { b.append(CharStreams.toString(new InputStreamReader(data))); }
     }
     b.append(fContent);
     fContent = b.toString();
