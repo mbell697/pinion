@@ -50,5 +50,10 @@ public class FileResolver {
 
   }
 
+  public static String relativePath(String fsPath, FileObject file) throws FileSystemException {
+    FileObject root = VFS.getManager().resolveFile(fsPath);
+    return root.getName().getRelativeName(file.getName());
+  }
+
 
 }

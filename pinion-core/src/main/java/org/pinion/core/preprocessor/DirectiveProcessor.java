@@ -1,6 +1,7 @@
 package org.pinion.core.preprocessor;
 
 import com.google.common.base.Optional;
+import org.apache.commons.vfs2.FileName;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
 import org.pinion.core.asset.Asset;
@@ -38,10 +39,7 @@ public class DirectiveProcessor implements Preprocessor {
       for (String arg: d.args.get()) {
         List<FileObject> files = FileResolver.resolveGlob(asset.fsPath, arg.replace("\"", ""));
         for (FileObject file : files) {
-          String absolutePath = file.getName().getPath();
-          String rootPath = asset.fsPath + "/";
-          String logicalPath = absolutePath.replaceFirst(rootPath,"");
-          requiredPaths.add(logicalPath);
+          requiredPaths.add(FileResolver.relativePath(asset.fsPath,file));
         }
       }
     }
