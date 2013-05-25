@@ -10,7 +10,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 public class ProcessedAsset extends Asset {
   public ProcessedAsset(final String path, final Pinion env) throws IOException {

@@ -6,10 +6,14 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.Scriptable;
 import org.pinion.core.asset.Asset;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 
 public class CoffeeScriptCompiler implements Engine {
+  private final Logger LOG = LoggerFactory.getLogger(CoffeeScriptCompiler.class);
+
   private Scriptable scope;
   private Options options;
 
@@ -49,10 +53,15 @@ public class CoffeeScriptCompiler implements Engine {
       compileScope.setParentScope(scope);
       compileScope.put("coffeeScriptSource", compileScope, input);
       try {
-        return (String) context.evaluateString(compileScope,
+
+        Long start = System.currentTimeMillis();
+        String result = (String) context.evaluateString(compileScope,
             String.format("CoffeeScript.compile(coffeeScriptSource, %s);",
                 options.toJson()),
             "CoffeeScriptCompiler", 0, null);
+        Long time = System.currentTimeMillis() - start;
+        LOG.info("[Coffee] " + asset.logicalPath + " " + time );
+        return result;
       } catch (JavaScriptException e) {
         throw new IllegalStateException("Failed to compile CS: " + e.getMessage());
       }

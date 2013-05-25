@@ -5,10 +5,14 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.Scriptable;
 import org.pinion.core.asset.Asset;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 
 public class CssminCompressor implements Compressor {
+  private final Logger LOG = LoggerFactory.getLogger(CssminCompressor.class);
+
   private Scriptable scope;
   private Options options;
 
@@ -48,9 +52,13 @@ public class CssminCompressor implements Compressor {
       compileScope.setParentScope(scope);
       compileScope.put("cssSource", compileScope, input);
       try {
-        return (String) context.evaluateString(compileScope,
+        Long start = System.currentTimeMillis();
+        String result = (String) context.evaluateString(compileScope,
             "cssmin(cssSource);",
             "CssMinifier", 0, null);
+        Long time = System.currentTimeMillis() - start;
+        LOG.info("[Cssmin] " + asset.logicalPath + " " + time );
+        return result;
       } catch (JavaScriptException e) {
         throw new IllegalStateException("Failed to compress css: " + e.getMessage());
       }

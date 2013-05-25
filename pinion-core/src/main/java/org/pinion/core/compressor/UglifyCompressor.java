@@ -7,6 +7,8 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.tools.shell.Global;
 import org.pinion.core.asset.Asset;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,6 +17,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UglifyCompressor implements Compressor {
+  private final Logger LOG = LoggerFactory.getLogger(UglifyCompressor.class);
+
   private Scriptable scope;
   private Function compile;
   public Options options;
@@ -60,7 +64,12 @@ public class UglifyCompressor implements Compressor {
     //fucking with Rhino in an effort to pass them as a NativeObject and failed, I give up for now.
     //Rhino's documentation is only slightly better than its performance, which is to say, terrible.
     final Object[] args = {input, options.toJson()};
-    return (String) Context.call(null, compile, scope, scope, args);
+
+    Long start = System.currentTimeMillis();
+    String result = (String) Context.call(null, compile, scope, scope, args);
+    Long time = System.currentTimeMillis() - start;
+    LOG.info("[Uglify] " + asset.logicalPath + " " + time );
+    return result;
   }
 
   public class Options {

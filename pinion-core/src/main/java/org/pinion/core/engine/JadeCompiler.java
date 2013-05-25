@@ -3,6 +3,8 @@ package org.pinion.core.engine;
 import de.neuland.jade4j.JadeConfiguration;
 import de.neuland.jade4j.template.TemplateLoader;
 import org.pinion.core.asset.Asset;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -10,6 +12,7 @@ import java.io.StringReader;
 import java.util.HashMap;
 
 public class JadeCompiler implements Engine {
+  private final Logger LOG = LoggerFactory.getLogger(JadeCompiler.class);
   JadeConfiguration config = new JadeConfiguration();
 
   public JadeCompiler() {
@@ -19,7 +22,11 @@ public class JadeCompiler implements Engine {
   @Override
   public String run(String input, Asset asset) {
     try {
-      return config.renderTemplate(config.getTemplate(input),new HashMap<String,Object>());
+      Long start = System.currentTimeMillis();
+      String result = config.renderTemplate(config.getTemplate(input),new HashMap<String,Object>());
+      Long time = System.currentTimeMillis() - start;
+      LOG.info("[Jade] " + asset.logicalPath + " " + time );
+      return result;
     } catch (IOException e) {
       throw new Error("This is impossible");
     }
