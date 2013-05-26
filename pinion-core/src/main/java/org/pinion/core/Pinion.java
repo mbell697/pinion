@@ -27,6 +27,7 @@ import org.pinion.core.preprocessor.Preprocessor;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.*;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -109,13 +110,18 @@ public class Pinion {
     basePath = config.getAssetPath();
 
     //Shenanigans to deal with figuring out if we're running inside a jar file or from a real file system
-    //if we're running from a file system this will have 'file:' at the beginning
-    //if we're running inside a jar this will have 'jar:' at the beginning
-    fsPath = this.getClass().getClassLoader().getResource(".").toString();
+    //TODO should be a better way...
+    URL url = getClass().getClassLoader().getResource(".");
+    if (url == null) {
+      url = getClass().getProtectionDomain().getCodeSource().getLocation();
+    }
+    fsPath = url.toString();
 
     //append the internal path separator that commons VFS expects if inside a jar
-    if (fsPath.startsWith("jar:"))
+    if (fsPath.contains(".jar")) {
       fsPath = fsPath + "!/";
+      fsPath = fsPath.replaceFirst("file","jar");
+    }
     fsPath = fsPath + basePath;
 
     cache = new MemoryCache();  //TODO config
