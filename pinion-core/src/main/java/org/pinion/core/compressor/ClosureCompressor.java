@@ -15,7 +15,7 @@ public class ClosureCompressor implements Compressor {
   public ClosureCompressor(CompilerOptions options) {
     if (options == null) {
       this.options = new CompilerOptions();
-      CompilationLevel.SIMPLE_OPTIMIZATIONS.setOptionsForCompilationLevel(options);
+      CompilationLevel.SIMPLE_OPTIMIZATIONS.setOptionsForCompilationLevel(this.options);
     } else {
       this.options = options;
     }
