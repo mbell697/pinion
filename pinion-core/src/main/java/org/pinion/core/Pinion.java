@@ -24,6 +24,8 @@ import org.pinion.core.engine.LESSCompiler;
 import org.pinion.core.files.FileResolver;
 import org.pinion.core.preprocessor.DirectiveProcessor;
 import org.pinion.core.preprocessor.Preprocessor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,6 +35,8 @@ import java.util.*;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class Pinion {
+
+  private final Logger LOG = LoggerFactory.getLogger(Pinion.class);
 
   public String basePath;
   public String version;

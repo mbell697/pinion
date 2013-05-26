@@ -78,7 +78,7 @@ public class LESSCompiler implements Engine {
       Context cx = Context.enter();
       Object result = doIt.call(cx, scope, null, new Object[]{source.getNormalizedContent(), compress});
 
-      LOG.info("[LESS] " + asset.logicalPath + (System.currentTimeMillis() - start) + " ms.");
+      LOG.info("[LESS] " + asset.logicalPath + " " + (System.currentTimeMillis() - start) + " ms.");
 
       return result.toString();
     }
